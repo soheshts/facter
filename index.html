@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Facter</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/js/uikit-icons.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+    <div class="uk-container uk-padding-small uk-position-cover uk-height-1-1 uk-background-secondary uk-width-1-1">
+        <div class="uk-position-center">
+            <p id="fact" class="uk-text-lead uk-text-break uk-text-muted"></p>
+            <div id="spin" uk-spinner="ratio: 3"></div>
+        </div>
+        <div class="uk-position-medium  uk-position-bottom-right uk-overlay ">
+            <button class="uk-button uk-button-primary" onclick="getFact()">Another Fact</button>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        getFact();
+
+    });
+    function getFact() {
+        $("#fact").text("");
+        $("#spin").show();
+
+        $.ajax({
+            url: "https://asli-fun-fact-api.herokuapp.com/",
+
+            success: function (data) {
+                $("#fact").text(data.data.fact);
+                $("#spin").hide();
+            },
+        });
+    }
+</script>
+
+</html>
